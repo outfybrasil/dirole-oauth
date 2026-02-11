@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecionando para o App...</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             display: flex;
             align-items: center;
@@ -23,11 +17,7 @@
             text-align: center;
             padding: 2rem;
         }
-
-        .container {
-            max-width: 400px;
-        }
-
+        .container { max-width: 400px; }
         .spinner {
             width: 50px;
             height: 50px;
@@ -37,25 +27,11 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 1.5rem;
         }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            opacity: 0.9;
-            font-size: 0.95rem;
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        p { opacity: 0.9; font-size: 0.95rem; }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="spinner"></div>
@@ -63,25 +39,21 @@
         <p>Retornando ao Dirole...</p>
     </div>
     <script>
-        // Get URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const hasError = urlParams.has('error');
-
-        // Construct deep link
-        const deepLink = hasError
-            ? 'dirole://oauth/callback?error=true'
-            : 'dirole://oauth/callback';
-
+        // PEGA TODOS OS PARÂMETROS DA URL (userId, secret, etc)
+        const urlParams = window.location.search;
+        
+        // CONSTRÓI O DEEP LINK COM OS PARÂMETROS
+        const deepLink = 'dirole://oauth/callback' + urlParams;
+        
         console.log('[OAuth Bridge] Redirecting to:', deepLink);
-
-        // Redirect to app
+        
+        // REDIRECIONA PARA O APP
         window.location.href = deepLink;
-
-        // Fallback: close window after 3 seconds
+        
+        // Fallback: fecha a janela após 3s
         setTimeout(() => {
             window.close();
         }, 3000);
     </script>
 </body>
-
 </html>
